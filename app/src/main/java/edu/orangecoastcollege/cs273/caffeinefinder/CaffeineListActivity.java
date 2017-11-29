@@ -164,6 +164,7 @@ public class CaffeineListActivity extends AppCompatActivity
                     COARSE_LOCATION_REQUEST_CODE );
             return;
         }
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         handleNewLocation(mLastLocation);
     }
@@ -182,8 +183,10 @@ public class CaffeineListActivity extends AppCompatActivity
             mLastLocation.setLatitude(0.0);
             mLastLocation.setLongitude(0.0);
         }
-        else
+        else {
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        }
 
         //DONE: In either case, handle the new location.
         handleNewLocation(mLastLocation);
